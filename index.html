@@ -1,32 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Page Title</title>
-</head>
-<style>
-body {
-  background-color: blue;
-}
-
-h1 {
-  color: pink;
-  text-align: center;
-}
-
-p {
-  font-family: verdana;
-  font-size: 20px;
-}
-</style>
-<body>
-
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
-<button onclick=</button>
-
-<img id="myImage" src="pic_bulboff.gif" style="width:100px">
-
-<button onclick="document.getElementById('myImage').src='pic_bulboff.gif'">Turn off the light</button>
-
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page Title</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="todo-app"></div>
+      <h1>ToDo</h1>
+      <form class="input">
+        <input type="text" id="task-input" placeholder="Add new task..." />
+        <button type="submit" id="add-task-btn">Add</button>
+      </form>
+      <ul id="task-list"></ul>
+      <img class="empty" src="C:/Users/anany/Downloads/pandaPic2.png" alt="NOT FOUND">
+      <div class="footer">
+        <span id="task-count">0 tasks left</span>
+        <button id="clear-completed-btn">Clear Completed</button>
+    </div>
+  </body>
+  <style src="style.css"></style>
+  <script src="script.js"></script>
 </html>
