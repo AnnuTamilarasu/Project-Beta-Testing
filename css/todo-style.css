@@ -127,7 +127,7 @@ body {
 }
 
 /* Empty state image */
-.empty {
+.task {
   width: 200px;
   opacity: 0.6;
 }
