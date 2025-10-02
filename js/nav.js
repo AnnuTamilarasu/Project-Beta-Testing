@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <input type="text" id="search-input" placeholder="Search tasks..." />
                 <button id="search-btn">Search</button>
             </form>
+            <button id="btn3"><a href="login.html">Login</a></button>
         </nav>
 
     `;

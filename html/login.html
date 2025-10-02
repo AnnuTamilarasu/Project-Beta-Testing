@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDo</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/todo-style.css" />
+  </head>
+  <body>
+    <div id="navbar-container"></div>
+
+    <div class="container">
+      <div class="todo-app">
+        <h1>Login</h1>
+        <form class="input-box">
+          <input type="text" id="task-input" placeholder="Username" />
+        </form>
+        <form class="input-box">
+          <input type="text" id="task-input" placeholder="Password" />
+        </form>
+        <form class="input-box">
+          <input type="text" id="task-input" placeholder="Re-Enter Password" />
+        </form>
+        <div class="todos-container">
+          <ul id="task-list">
+            <li class="task">Math</li>
+            <li class="task">CompSci</li>
+          </ul>
+        </div>
+        <div class="footer">
+          <span id="task-count">0 tasks left</span>
+          <button id="clear-completed-btn">Clear Completed</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/nav.js"></script>
+    <script src="../js/script.js"></script>
+  </body>
+</html>
