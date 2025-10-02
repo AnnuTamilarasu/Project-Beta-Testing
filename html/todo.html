@@ -3,10 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
-    <link rel="stylesheet" href="todo-style.css" />
+    <title>ToDo</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/todo-style.css" />
   </head>
   <body>
+    <div id="navbar-container"></div>
+
     <div class="container">
       <div class="todo-app">
         <h1>ToDo</h1>
@@ -15,8 +18,10 @@
           <button type="submit" id="add-task-btn">Add</button>
         </form>
         <div class="todos-container">
-          <ul id="task-list"></ul>
-          <img class="empty" src="pandaPic2.png" alt="NOT FOUND" />
+          <ul id="task-list">
+            <li class="task">Math</li>
+            <li class="task">CompSci</li>
+          </ul>
         </div>
         <div class="footer">
           <span id="task-count">0 tasks left</span>
@@ -24,6 +29,8 @@
         </div>
       </div>
     </div>
-    <script src="script.js"></script>
+
+    <script src="../js/nav.js"></script>
+    <script src="../js/script.js"></script>
   </body>
 </html>
