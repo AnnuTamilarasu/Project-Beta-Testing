@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ToDo</title>
+    <title>Login</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/todo-style.css" />
   </head>
@@ -14,22 +14,26 @@
       <div class="todo-app">
         <h1>Login</h1>
         <form class="input-box">
-          <input type="text" id="task-input" placeholder="Username" />
+          <input type="text" id="username-input" placeholder="Username" />
         </form>
         <form class="input-box">
-          <input type="text" id="task-input" placeholder="Password" />
+          <input type="password" id="password-input" placeholder="Password" />
         </form>
         <form class="input-box">
-          <input type="text" id="task-input" placeholder="Re-Enter Password" />
+          <input
+            type="password"
+            id="confirm-password-input"
+            placeholder="Re-Enter Password"
+          />
         </form>
         <div class="footer">
-          <button type="submit" id="clear-completed-btn">Login</button>
-          <button id="clear-completed-btn">Sign Up</button>
+          <button type="submit" id="login-btn" class="pink-btn">Login</button>
+          <button id="signup-btn" class="pink-btn">Sign Up</button>
         </div>
       </div>
     </div>
 
-    <script src="../js/nav.js"></script>
-    <script src="../js/script.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>

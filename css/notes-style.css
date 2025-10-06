@@ -1,13 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
-/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
-/* Page layout (where the toto box is )*/
 body {
   font-family: "Comic Neue", cursive;
   font-weight: 300;
@@ -18,7 +15,7 @@ body {
   min-height: 100vh;
   background: #fdeafc no-repeat center center fixed;
 }
-.container {
+.notes-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,24 +25,23 @@ body {
   border-radius: 10px;
 }
 
-/* todo box */
-.todo-app {
+.notes-app {
   width: 100%;
-  max-width: 400px;
+  max-width: 1000px;
   padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 30px;
-  color: aqua;
+  color: rgb(53, 4, 55);
   border-radius: 20px;
   box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
   border: 3px solid rgba(255, 255, 255, 0.18);
   backdrop-filter: blur(10px);
 }
 
-.todo-app h1 {
+.notes-app h1 {
   font-size: 2rem;
 }
 
@@ -93,8 +89,7 @@ body {
   background: #ff6f91;
 }
 
-/* Task list */
-.todos-container {
+.individual-notes-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,13 +98,13 @@ body {
   width: 100%;
 }
 
-#task-list {
+#note-list {
   list-style: none;
   width: 100%;
   padding: 0;
 }
 
-#task-list li {
+#notes-list li {
   background: rgba(255, 255, 255, 0.8);
   margin-bottom: 10px;
   padding: 10px 15px;
@@ -121,18 +116,16 @@ body {
   transition: all 0.2s ease;
 }
 
-#task-list li.completed {
+#note-list li.completed {
   text-decoration: line-through;
   color: #aaa;
 }
 
-/* Empty state image */
-.empty {
+.note {
   width: 200px;
   opacity: 0.6;
 }
 
-/* Footer */
 .footer {
   display: flex;
   justify-content: space-between;
@@ -141,16 +134,22 @@ body {
   font-size: 0.9rem;
 }
 
-#clear-completed-btn {
-  background: #ff6f91;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+.toggle-complete {
+    margin-right: 10px;
+    cursor: pointer;
 }
 
-#clear-completed-btn:hover {
-  background: #ff4c70;
+.delete-btn {
+    background: #ff6f91;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+    background: #ff4c70;
 }

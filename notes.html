@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/notes-style.css" />
+  </head>
+  <body>
+    <div id="navbar-container"></div>
+
+    <div class="notes-container">
+      <div class="notes-app">
+        <h1>Notes</h1>
+        <form class="input-box">
+          <input type="text" id="notes-input" placeholder="Add new note..." />
+          <button type="submit" id="add-note-btn">Add</button>
+        </form>
+        <div class="individual-notes-container">
+          <ul id="notes-list" class="note-list">
+            <!-- Notes will be dynamically added here by JavaScript -->
+          </ul>
+        </div>
+        <div class="footer">
+          <span id="note-count">0 notes left</span>
+          <button id="clear-completed-btn" class="pink-btn">
+            Clear Completed
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/nav.js"></script>
+    <script src="js/notes.js"></script>
+  </body>
+</html>

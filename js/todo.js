@@ -1,8 +1,8 @@
-const todoInput = document.querySelector('task-input');
-const todoButton = document.querySelector('add-task-btn');
-const todoList = document.querySelector('task-list');
-const taskCount = document.querySelector('task-count');
-const deleteTask = document.querySelector('clear-completed-btn');
+const todoInput = document.querySelector('#task-input');
+const todoButton = document.querySelector('#add-task-btn');
+const todoList = document.querySelector('#task-list');
+const taskCount = document.querySelector('#task-count');
+const deleteTask = document.querySelector('#clear-completed-btn');
 
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 function addTask(event) {
@@ -29,9 +29,7 @@ function renderTasks() {
         li.innerHTML = `
             <input type="checkbox" ${task.completed ? 'checked' : ''} data-index="${index}" class="toggle-complete"/>
             <span>${task.text}</span>
-            <button data-index="${index}" class="delete-btn
-">Delete</button>
-        `;
+            <button data-index="${index}" class="delete-btn">Delete</button> `;
         todoList.appendChild(li);
     });
 }
@@ -67,7 +65,28 @@ function saveTasks() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
-deleteTask.addEventListener('click', clearCompletedTasks);
 todoButton.addEventListener('click', addTask);
+todoInput.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        addTask(event);
+    }
+});
+
 todoList.addEventListener('click', function(event) {
+    if (event.target.classList.contains('toggle-complete')) {
+        const index = parseInt(event.target.getAttribute('data-index'));
+        toggleComplete(index);
+    }
     if (event.target.classList.contains('delete-btn')) {
+        const index = parseInt(event.target.getAttribute('data-index'));
+        deleteTaskByIndex(index);
+    }
+});
+
+deleteTask.addEventListener('click', clearCompletedTasks);
+
+function init() {
+    renderTasks();
+    updateTaskCount();
+}
+init();

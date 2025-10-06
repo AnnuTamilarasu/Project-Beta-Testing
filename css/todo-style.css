@@ -1,13 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
-/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
-/* Page layout (where the toto box is )*/
 body {
   font-family: "Comic Neue", cursive;
   font-weight: 300;
@@ -28,7 +25,6 @@ body {
   border-radius: 10px;
 }
 
-/* todo box */
 .todo-app {
   width: 100%;
   max-width: 400px;
@@ -93,7 +89,6 @@ body {
   background: #ff6f91;
 }
 
-/* Task list */
 .todos-container {
   display: flex;
   align-items: center;
@@ -110,14 +105,14 @@ body {
 }
 
 #task-list li {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.4);
   margin-bottom: 10px;
   padding: 10px 15px;
   border-radius: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1rem;
+  font-size: 20px;
   transition: all 0.2s ease;
 }
 
@@ -126,13 +121,11 @@ body {
   color: #aaa;
 }
 
-/* Empty state image */
 .task {
   width: 200px;
   opacity: 0.6;
 }
 
-/* Footer */
 .footer {
   display: flex;
   justify-content: space-between;
@@ -141,16 +134,22 @@ body {
   font-size: 0.9rem;
 }
 
-#clear-completed-btn {
-  background: #ff6f91;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+.toggle-complete {
+    margin-right: 10px;
+    cursor: pointer;
 }
 
-#clear-completed-btn:hover {
-  background: #ff4c70;
+.delete-btn {
+    background: #ff6f91;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+    background: #ff4c70;
 }

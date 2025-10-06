@@ -110,3 +110,18 @@ body {
   font-size: 1.2rem;
   margin-top: 20px;
 }
+
+.pink-btn {
+    background: #ff6f91;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+}
+
+.pink-btn:hover {
+    background: #ff4c70;
+}
