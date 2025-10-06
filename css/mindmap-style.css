@@ -1,0 +1,68 @@
+html, body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: linear-gradient(
+    0deg,
+    rgba(102, 38, 88, 1) 0%,
+    rgba(217, 91, 175, 1) 50%,
+    rgba(240, 156, 156, 1) 100%
+  );
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.container {
+  position: absolute;
+  padding: 10px 15px;
+  background: pink;
+  border: 2px solid #333;
+  border-radius: 12px;
+  cursor: grab;
+  user-select: none;
+}
+
+.Button {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 30px;
+  height: 30px;
+  background: purple;
+  color: white;
+  border: 0;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.Mutton {
+  position: absolute;
+  top: -12px;
+  right: -42px;
+  width: 30px;
+  height: 30px;
+  background: purple;
+  color: white;
+  border: 0;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+
+line {
+  stroke: #333;
+  stroke-width: 2;
+}

@@ -2,172 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mindmap</title>
-    <style>
-      html,
-      body {
-        font-family: sans-serif;
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        background: linear-gradient(
-          0deg,
-          rgba(102, 38, 88, 1) 0%,
-          rgba(217, 91, 175, 1) 50%,
-          rgba(240, 156, 156, 1) 100%
-        );
-      }
-      .container {
-        position: absolute;
-        padding: 10px 15px;
-        background: pink;
-        border: 2px solid #333;
-        border-radius: 12px;
-        cursor: grab;
-        user-select: none;
-      }
-      .Button {
-        position: absolute;
-        top: -12px;
-        right: -12px;
-        width: 30px;
-        height: 30px;
-        background: purple;
-        color: white;
-        border: 0;
-        border-radius: 50px;
-        cursor: pointer;
-      }
-      .Mutton {
-        position: absolute;
-        top: -12px;
-        right: -42px;
-        width: 30px;
-        height: 30px;
-        background: purple;
-        color: white;
-        border: 0;
-        border-radius: 50px;
-        cursor: pointer;
-      }
-      svg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        pointer-events: none;
-      }
-      line {
-        stroke: #333;
-        stroke-width: 2;
-      }
-    </style>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="nav.css" />
+    <link rel="stylesheet" href="css/mindmap-style.css" />
   </head>
   <body>
+    <div id="navbar-container"></div>
     <h1>MindMap</h1>
     <svg></svg>
-
-    <script>
-      const connections = [];
-      const nodes = [];
-      function connectNodes(nodeA, nodeB) {
-        const line = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "line"
-        );
-        line.setAttribute("stroke", "#333");
-        line.setAttribute("stroke-width", "2");
-        document.querySelector("svg").appendChild(line);
-        connections.push({ nodeA, nodeB, line });
-        updateAllLines();
-      }
-      function updateAllLines() {
-        connections.forEach(({ nodeA, nodeB, line }) => {
-          const r1 = nodeA.getBoundingClientRect();
-          const r2 = nodeB.getBoundingClientRect();
-          line.setAttribute("x1", r1.left + r1.width / 2);
-          line.setAttribute("y1", r1.top + r1.height / 2);
-          line.setAttribute("x2", r2.left + r2.width / 2);
-          line.setAttribute("y2", r2.top + r2.height / 2);
-        });
-      }
-      function removeAll(node) {
-        const child = connections
-          .filter((c) => c.nodeA === node)
-          .map((c) => c.nodeB);
-        connections
-          .filter((c) => c.nodeA === node || c.nodeB === node)
-          .forEach((c) => {
-            c.line.remove();
-            const index = connections.indexOf(c);
-            if (index > -1) {
-              connections.splice(index, 1);
-            }
-          });
-        node.remove();
-        child.forEach((child) => removeAll(child));
-      }
-      function createNode(a, b, text = "New Node") {
-        const node = document.createElement("div");
-        node.className = "container";
-        node.style.left = a + "px";
-        node.style.top = b + "px";
-        node.contentEditable = "true";
-        node.innerHTML = text;
-        nodes.push({ node, a, b, text });
-
-        const addBon = document.createElement("button");
-        addBon.className = "Button";
-        addBon.textContent = "+";
-        node.appendChild(addBon);
-
-        const minusBon = document.createElement("button");
-        minusBon.className = "Mutton";
-        minusBon.textContent = "-";
-        node.appendChild(minusBon);
-
-        document.body.appendChild(node);
-
-        makeDraggable(node, updateAllLines);
-        addBon.addEventListener("click", (e) => {
-          e.stopPropagation();
-          const rect = node.getBoundingClientRect();
-          const newNode = createNode(rect.left + 150, rect.top, "New Node");
-          connectNodes(node, newNode);
-        });
-        minusBon.addEventListener("click", (e) => {
-          e.stopPropagation();
-          removeAll(node);
-        });
-        return node;
-      }
-      function makeDraggable(el, onMove) {
-        el.onmousedown = (e) => {
-          let shiftX = e.clientX - el.getBoundingClientRect().left;
-          let shiftY = e.clientY - el.getBoundingClientRect().top;
-
-          function moveAt(x, y) {
-            el.style.left = x - shiftX + "px";
-            el.style.top = y - shiftY + "px";
-            if (onMove) onMove();
-          }
-
-          function onMouseMove(e) {
-            moveAt(e.pageX, e.pageY);
-          }
-          document.addEventListener("mousemove", onMouseMove);
-          el.onmouseup = () => {
-            document.removeEventListener("mousemove", onMouseMove);
-            el.onmouseup = null;
-          };
-        };
-        el.ondragstart = () => false;
-      }
-      function saveData() {}
-      const node1 = createNode(200, 100, "Main Idea");
-      const node2 = createNode(400, 300, "Sub Idea");
-      connectNodes(node1, node2);
-    </script>
+    <script src="js/nav.js"></script>
+    <script src="js/mindmap.js"></script>
   </body>
 </html>
