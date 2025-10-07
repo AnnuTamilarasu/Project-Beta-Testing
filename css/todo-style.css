@@ -13,7 +13,12 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #fdeafc no-repeat center center fixed;
+  background: linear-gradient(
+    0deg,
+    rgb(142, 45, 121) 0%,
+    rgb(219, 95, 178) 50%,
+    rgb(246, 165, 165) 100%
+  );
 }
 .container {
   display: flex;

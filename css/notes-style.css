@@ -13,7 +13,12 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #fdeafc no-repeat center center fixed;
+  background: linear-gradient(
+    0deg,
+    rgb(142, 45, 121) 0%,
+    rgb(219, 95, 178) 50%,
+    rgb(246, 165, 165) 100%
+  );
 }
 .notes-container {
   display: flex;
@@ -36,8 +41,8 @@ body {
   gap: 30px;
   color: rgb(53, 4, 55);
   border-radius: 20px;
-  box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
-  border: 3px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.3);
+  border: 3px solid rgba(255, 255, 255, 0.38);
   backdrop-filter: blur(10px);
 }
 
@@ -76,7 +81,7 @@ body {
   margin-left: 10px;
   padding: 8px;
   border-radius: 50%;
-  color: #fff;
+  color: #ffffff;
   font-size: 1.1rem;
   background: rgba(225, 194, 209, 0.6);
   border: 2px solid rgba(255, 255, 255, 0.18);
@@ -86,7 +91,7 @@ body {
 
 .input-box button:hover {
   transform: scale(1.1);
-  background: #ff6f91;
+  background: #ecb8cf;
 }
 
 .individual-notes-container {
@@ -105,7 +110,7 @@ body {
 }
 
 #notes-list li {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(211, 164, 164, 0.8);
   margin-bottom: 10px;
   padding: 10px 15px;
   border-radius: 12px;
@@ -122,7 +127,7 @@ body {
 }
 
 .note {
-  width: 200px;
+  width: 80%;
   opacity: 0.6;
 }
 
@@ -141,7 +146,7 @@ body {
 
 .delete-btn {
     background: #ff6f91;
-    color: white;
+    color: rgb(249, 231, 240);
     border: none;
     padding: 5px 10px;
     border-radius: 8px;

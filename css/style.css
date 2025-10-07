@@ -12,10 +12,14 @@ body {
   font-style: normal;
   display: flex;
   justify-content: center;
-  align-content: initial;
-  min-height: 120px;
-  min-width: 100%;
-  background: #fdeafc no-repeat center center fixed;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(
+    0deg,
+    rgb(142, 45, 121) 0%,
+    rgb(219, 95, 178) 50%,
+    rgb(246, 165, 165) 100%
+  );
 }
 
 .navbar {
@@ -62,7 +66,7 @@ body {
   outline: none;
   border-radius: 25px;
   box-shadow: 0 0 10px rgba(255, 194, 209, 0.3);
-  color: #333;
+  color: #ffffff;
 }
 
 .search-box button {
