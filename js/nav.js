@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <nav class="navbar">
                 <button onclick="window.location.href='index.html'">Home</button>
                 <button onclick="window.location.href='todo.html'">ToDo</button>
-                <button onclick="window.location.href='course.html'">Notes</button>
+                <button onclick="window.location.href='course-add.html'">Notes</button>
                 <div class="search-box">
                     <input type="text" placeholder="Search..." />
                     <button type="submit">Search</button>
