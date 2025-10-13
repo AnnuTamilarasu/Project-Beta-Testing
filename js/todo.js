@@ -14,15 +14,21 @@ function addTask(event) {
         completed: false,
         id: Date.now()
     }
-    tasks.push({ text: taskText, completed: false });
+    tasks.push(addedTask);
         todoInput.value = '';
         saveTasks();
         renderTasks();
-        updateTaskCount();
 }
 
 function renderTasks() {
     todoList.innerHTML = '';
+    
+    if (tasks.length === 0) {
+        todoList.innerHTML = '<div class="empty-state">No tasks yet. Add one to get started! 🎯</div>';
+        updateTaskCount();
+        return;
+    }
+            
     tasks.forEach((task, index) => {
         const li = document.createElement('li');
         li.className = task.completed ? 'completed' : '';   
@@ -32,6 +38,7 @@ function renderTasks() {
             <button data-index="${index}" class="delete-btn">Delete</button> `;
         todoList.appendChild(li);
     });
+    updateTaskCount();
 }
 function updateTaskCount() {
     const remainingTasks = tasks.filter(task => !task.completed).length;
@@ -41,25 +48,16 @@ function clearCompletedTasks() {
     tasks = tasks.filter(task => !task.completed);
     saveTasks();
     renderTasks();
-    updateTaskCount();
 }
 function toggleComplete(index) {
     tasks[index].completed = !tasks[index].completed;
     saveTasks();
     renderTasks();
-    updateTaskCount();
 }
 function deleteTaskByIndex(index) {
     tasks.splice(index, 1);
     saveTasks();
     renderTasks();
-    updateTaskCount();
-}
-function clearCompletedTasks() {
-    tasks = tasks.filter(task => !task.completed);
-    saveTasks();
-    renderTasks();
-    updateTaskCount();
 }
 function saveTasks() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -87,6 +85,5 @@ deleteTask.addEventListener('click', clearCompletedTasks);
 
 function init() {
     renderTasks();
-    updateTaskCount();
 }
 init();

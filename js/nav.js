@@ -1,4 +1,3 @@
-// nav.js - Navigation system
 document.addEventListener('DOMContentLoaded', function() {
     const navbarContainer = document.getElementById('navbar-container');
     
