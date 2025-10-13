@@ -1,18 +1,43 @@
-// Redirect to login if not logged in
+// ---- Elements ----
+const noteInput = document.querySelector('#notes-input');
+const noteButton = document.querySelector('#add-note-btn');
+const noteList = document.querySelector('#notes-list');
+const noteCount = document.querySelector('#note-count');
+const clearCompletedBtn = document.querySelector('#clear-completed-btn');
+
+const back = document.createElement('button');
+back.textContent = 'back';
+back.className = 'delete-btn';
+back.style.marginTop = '10px';
+document.querySelector('.notes-app').appendChild(back);
+
+// ---- Get current user and subject ----
 const currentUser = localStorage.getItem('currentUser');
 if (!currentUser) {
-  window.location.href = 'login.html';
+    window.location.href = 'login.html';
 }
 
-const noteInput = document.getElementById('note-input');
-const addNoteBtn = document.getElementById('add-note-btn');
-const notesListContainer = document.getElementById('notes-list');
+const subjectIndex = localStorage.getItem('currentIndex');
+const users = JSON.parse(localStorage.getItem('users')) || {};
+const currentUserData = users[currentUser] || {};
+const subjects = currentUserData.subjects || [];
 
-// Load users and current user's notes
-let users = JSON.parse(localStorage.getItem('users')) || {};
-let notesList = users[currentUser]?.notes || [];
+if (subjectIndex !== null && subjects[subjectIndex]) {
+    document.querySelector('.notes-app h1').textContent = `Notes for ${subjects[subjectIndex].subject}`;
+}
 
-// Add a new note
+// Get notes for current subject
+let notes = subjects[subjectIndex]?.notes || [];
+
+// ---- Functions ----
+function saveNotes() {
+    if (!users[currentUser]) users[currentUser] = {};
+    if (!users[currentUser].subjects) users[currentUser].subjects = [];
+    if (!users[currentUser].subjects[subjectIndex]) users[currentUser].subjects[subjectIndex] = {};
+    users[currentUser].subjects[subjectIndex].notes = notes;
+    localStorage.setItem('users', JSON.stringify(users));
+}
+
 function addNote(event) {
     event.preventDefault();
     const noteText = noteInput.value.trim();
@@ -20,59 +45,80 @@ function addNote(event) {
 
     const newNote = {
         text: noteText,
+        completed: false,
         id: Date.now()
     };
 
-    notesList.push(newNote);
+    notes.push(newNote);
     noteInput.value = '';
     saveNotes();
     renderNotes();
+    updateNoteCount();
 }
 
-// Render notes
 function renderNotes() {
-    notesListContainer.innerHTML = '';
-    notesList.forEach((note, index) => {
+    noteList.innerHTML = '';
+    notes.forEach((note, index) => {
         const li = document.createElement('li');
+        li.className = note.completed ? 'completed' : '';
         li.innerHTML = `
+            <input type="checkbox" ${note.completed ? 'checked' : ''} data-index="${index}" class="toggle-complete"/>
             <span>${note.text}</span>
-            <button data-index="${index}" class="delete-note-btn">Delete</button>
+            <button data-index="${index}" class="delete-btn">Delete</button>
         `;
-        notesListContainer.appendChild(li);
+        noteList.appendChild(li);
     });
 }
 
-// Delete a note
-function deleteNoteByIndex(index) {
-    notesList.splice(index, 1);
+function updateNoteCount() {
+    const remaining = notes.filter(note => !note.completed).length;
+    noteCount.textContent = `${remaining} note${remaining !== 1 ? 's' : ''} left`;
+}
+
+function toggleComplete(index) {
+    notes[index].completed = !notes[index].completed;
     saveNotes();
     renderNotes();
+    updateNoteCount();
 }
 
-// Save notes to localStorage
-function saveNotes() {
-    let users = JSON.parse(localStorage.getItem('users')) || {};
-    if (!users[currentUser]) return;
-
-    users[currentUser].notes = notesList;
-    localStorage.setItem('users', JSON.stringify(users));
+function deleteNoteByIndex(index) {
+    notes.splice(index, 1);
+    saveNotes();
+    renderNotes();
+    updateNoteCount();
 }
 
-// Event listeners
-addNoteBtn.addEventListener('click', addNote);
+function clearCompletedNotes() {
+    notes = notes.filter(note => !note.completed);
+    saveNotes();
+    renderNotes();
+    updateNoteCount();
+}
+
+// ---- Event Listeners ----
+noteButton.addEventListener('click', addNote);
+
 noteInput.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') addNote(event);
 });
 
-notesListContainer.addEventListener('click', (event) => {
-    if (event.target.classList.contains('delete-note-btn')) {
-        const index = parseInt(event.target.getAttribute('data-index'));
-        deleteNoteByIndex(index);
-    }
+noteList.addEventListener('click', (event) => {
+    const index = parseInt(event.target.getAttribute('data-index'));
+    if (event.target.classList.contains('toggle-complete')) toggleComplete(index);
+    if (event.target.classList.contains('delete-btn')) deleteNoteByIndex(index);
 });
 
-// Initialize
+clearCompletedBtn.addEventListener('click', clearCompletedNotes);
+
+back.addEventListener('click', () => {
+    window.location.href = 'course-add.html';
+});
+
+// ---- Initialize ----
 function init() {
     renderNotes();
+    updateNoteCount();
 }
+
 init();

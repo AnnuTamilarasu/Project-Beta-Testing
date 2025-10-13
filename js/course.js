@@ -1,96 +1,47 @@
-const noteInput = document.querySelector('#notes-input');
-const noteButton = document.querySelector('#add-note-btn');
-const noteList = document.querySelector('#notes-list');
-const noteCount = document.querySelector('#note-count');
-const clearCompletedBtn = document.querySelector('#clear-completed-btn');
+const subjectInput = document.querySelector('#subject-input');
+      const describeInput=document.querySelector('#description-input');
+const subjectButton = document.querySelector('#subjectAdd');
+const back=document.createElement('button');
 
-let notes = JSON.parse(localStorage.getItem('notes')) || [];
+back.textContent='back';
+back.className='delete-btn';
+back.style.marginTop='10px';
+document.querySelector('.subject-app').appendChild(back);
 
-function addNote(event) {
+let subjects = JSON.parse(localStorage.getItem('subjects')) || [];
+function addSubject(event) {
     event.preventDefault();
-    const noteText = noteInput.value.trim();
-    if (noteText === '') return;
-    
-    const addedNote = {
-        text: noteText,
+    const SubjectText = subjectInput.value.trim();
+    const DescribeText=describeInput.value.trim();
+    if (SubjectText === ''||DescribeText=='') return;
+    const addedSubject = {
+        subject: SubjectText,
+        description:DescribeText,
         completed: false,
         id: Date.now()
     };
     
-    notes.push(addedNote);
-    noteInput.value = '';
-    saveNotes();
-    renderNotes();
-    updateNoteCount();
+    subjects.push(addedSubject);
+    saveSubjects();
+    subjectInput.value = '';
+    describeInput.value='';
 }
 
-function renderNotes() {
-    noteList.innerHTML = '';
-    notes.forEach((note, index) => {
-        const li = document.createElement('li');
-        li.className = note.completed ? 'completed' : '';
-        li.innerHTML = `
-            <input type="checkbox" ${note.completed ? 'checked' : ''} data-index="${index}" class="toggle-complete"/>
-            <span>${note.text}</span>
-            <button data-index="${index}" class="delete-btn">Delete</button>
-        `;
-        noteList.appendChild(li);
-    });
+function saveSubjects() {
+    localStorage.setItem('subjects', JSON.stringify(subjects));
 }
 
-function updateNoteCount() {
-    const remainingNotes = notes.filter(note => !note.completed).length;
-    noteCount.textContent = `${remainingNotes} note${remainingNotes !== 1 ? 's' : ''} left`;
-}
-
-function clearCompletedNotes() {
-    notes = notes.filter(note => !note.completed);
-    saveNotes();
-    renderNotes();
-    updateNoteCount();
-}
-
-function toggleComplete(index) {
-    notes[index].completed = !notes[index].completed;
-    saveNotes();
-    renderNotes();
-    updateNoteCount();
-}
-
-function deleteNoteByIndex(index) {
-    notes.splice(index, 1);
-    saveNotes();
-    renderNotes();
-    updateNoteCount();
-}
-
-function saveNotes() {
-    localStorage.setItem('notes', JSON.stringify(notes));
-}
-
-noteButton.addEventListener('click', addNote);
-noteInput.addEventListener('keypress', function(event) {
+subjectButton.addEventListener('click', addSubject);
+subjectInput.addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
-        addNote(event);
+        addSubject(event);
     }
 });
-
-noteList.addEventListener('click', function(event) {
-    if (event.target.classList.contains('toggle-complete')) {
-        const index = parseInt(event.target.getAttribute('data-index'));
-        toggleComplete(index);
-    }
-    if (event.target.classList.contains('delete-btn')) {
-        const index = parseInt(event.target.getAttribute('data-index'));
-        deleteNoteByIndex(index);
+describeInput.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        addSubject(event);
     }
 });
-
-clearCompletedBtn.addEventListener('click', clearCompletedNotes);
-
-function init() {
-    renderNotes();
-    updateNoteCount();
-}
-
-init();
+back.addEventListener('click',function(){
+window.location.href = 'course-add.html';
+});

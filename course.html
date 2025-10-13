@@ -11,20 +11,24 @@
     <div id="navbar-container"></div>
     <div id="notes-navbar-container"></div>
 
-    <div class="notes-container">
-      <div class="notes-app">
+    <div class="subject-container">
+      <div class="subject-app">
         <h1>Subject</h1>
-        <form class="input-box" id="note-form">
+        <form class="input-box" id="subject-form">
           <input
             type="text"
-            id="notes-input"
+            id="subject-input"
             placeholder="Add new subject..."
           />
-          <button type="submit" id="add-note-btn">Add</button>
         </form>
-        <div class="individual-notes-container">
-          <ul id="notes-list" class="note-list"></ul>
-        </div>
+        <form class="description-box" id="description-form">
+          <input
+            type="text"
+            id="description-input"
+            placeholder="description..."
+          />
+        </form>
+        <button type="submit" id="subjectAdd">Add</button>
       </div>
     </div>
     <script src="js/nav.js"></script>
