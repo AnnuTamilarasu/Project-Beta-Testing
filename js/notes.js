@@ -1,96 +1,78 @@
-const noteInput = document.querySelector('#notes-input');
-const noteButton = document.querySelector('#add-note-btn');
-const noteList = document.querySelector('#notes-list');
-const noteCount = document.querySelector('#note-count');
-const clearCompletedBtn = document.querySelector('#clear-completed-btn');
+// Redirect to login if not logged in
+const currentUser = localStorage.getItem('currentUser');
+if (!currentUser) {
+  window.location.href = 'login.html';
+}
 
-let notes = JSON.parse(localStorage.getItem('notes')) || [];
+const noteInput = document.getElementById('note-input');
+const addNoteBtn = document.getElementById('add-note-btn');
+const notesListContainer = document.getElementById('notes-list');
 
+// Load users and current user's notes
+let users = JSON.parse(localStorage.getItem('users')) || {};
+let notesList = users[currentUser]?.notes || [];
+
+// Add a new note
 function addNote(event) {
     event.preventDefault();
     const noteText = noteInput.value.trim();
-    if (noteText === '') return;
-    
-    const addedNote = {
+    if (!noteText) return;
+
+    const newNote = {
         text: noteText,
-        completed: false,
         id: Date.now()
     };
-    
-    notes.push(addedNote);
+
+    notesList.push(newNote);
     noteInput.value = '';
     saveNotes();
     renderNotes();
-    updateNoteCount();
 }
 
+// Render notes
 function renderNotes() {
-    noteList.innerHTML = '';
-    notes.forEach((note, index) => {
+    notesListContainer.innerHTML = '';
+    notesList.forEach((note, index) => {
         const li = document.createElement('li');
-        li.className = note.completed ? 'completed' : '';
         li.innerHTML = `
-            <input type="checkbox" ${note.completed ? 'checked' : ''} data-index="${index}" class="toggle-complete"/>
             <span>${note.text}</span>
-            <button data-index="${index}" class="delete-btn">Delete</button>
+            <button data-index="${index}" class="delete-note-btn">Delete</button>
         `;
-        noteList.appendChild(li);
+        notesListContainer.appendChild(li);
     });
 }
 
-function updateNoteCount() {
-    const remainingNotes = notes.filter(note => !note.completed).length;
-    noteCount.textContent = `${remainingNotes} note${remainingNotes !== 1 ? 's' : ''} left`;
-}
-
-function clearCompletedNotes() {
-    notes = notes.filter(note => !note.completed);
-    saveNotes();
-    renderNotes();
-    updateNoteCount();
-}
-
-function toggleComplete(index) {
-    notes[index].completed = !notes[index].completed;
-    saveNotes();
-    renderNotes();
-    updateNoteCount();
-}
-
+// Delete a note
 function deleteNoteByIndex(index) {
-    notes.splice(index, 1);
+    notesList.splice(index, 1);
     saveNotes();
     renderNotes();
-    updateNoteCount();
 }
 
+// Save notes to localStorage
 function saveNotes() {
-    localStorage.setItem('notes', JSON.stringify(notes));
+    let users = JSON.parse(localStorage.getItem('users')) || {};
+    if (!users[currentUser]) return;
+
+    users[currentUser].notes = notesList;
+    localStorage.setItem('users', JSON.stringify(users));
 }
 
-noteButton.addEventListener('click', addNote);
-noteInput.addEventListener('keypress', function(event) {
-    if (event.key === 'Enter') {
-        addNote(event);
-    }
+// Event listeners
+addNoteBtn.addEventListener('click', addNote);
+noteInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') addNote(event);
 });
 
-noteList.addEventListener('click', function(event) {
-    if (event.target.classList.contains('toggle-complete')) {
-        const index = parseInt(event.target.getAttribute('data-index'));
-        toggleComplete(index);
-    }
-    if (event.target.classList.contains('delete-btn')) {
+notesListContainer.addEventListener('click', (event) => {
+    if (event.target.classList.contains('delete-note-btn')) {
         const index = parseInt(event.target.getAttribute('data-index'));
         deleteNoteByIndex(index);
     }
 });
 
-clearCompletedBtn.addEventListener('click', clearCompletedNotes);
-
+// Initialize
 function init() {
     renderNotes();
-    updateNoteCount();
 }
-
 init();

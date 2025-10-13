@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Login / Signup</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/todo-style.css" />
   </head>
@@ -12,27 +12,34 @@
 
     <div class="container">
       <div class="todo-app">
-        <h1>Login</h1>
-        <form class="input-box">
-          <input type="text" id="username-input" placeholder="Username" />
-        </form>
-        <form class="input-box">
-          <input type="password" id="password-input" placeholder="Password" />
-        </form>
-        <form class="input-box">
+        <h1 id="form-title">Sign In</h1>
+
+        <div class="input-box">
+          <input type="text" id="username" placeholder="Username" />
+        </div>
+
+        <div class="input-box">
+          <input type="password" id="password" placeholder="Password" />
+        </div>
+
+        <div id="confirm-password-box" class="input-box" style="display: none">
           <input
             type="password"
-            id="confirm-password-input"
-            placeholder="Re-Enter Password"
+            id="confirm-password"
+            placeholder="Re-enter Password"
           />
-        </form>
-        <div class="footer">
-          <button type="submit" id="login-btn" class="pink-btn">Login</button>
-          <button id="signup-btn" class="pink-btn">Sign Up</button>
         </div>
+
+        <div class="footer">
+          <button id="login-btn" class="pink-btn">Log In</button>
+          <button id="toggle-btn" class="pink-btn">Create Account</button>
+        </div>
+
+        <p id="message"></p>
       </div>
     </div>
 
     <script src="js/nav.js"></script>
+    <script src="js/login.js"></script>
   </body>
 </html>
