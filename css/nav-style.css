@@ -1,32 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Comic Neue", cursive;
-  font-weight: 300;
-  font-style: normal;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(
-    0deg,
-    rgb(142, 45, 121) 0%,
-    rgb(219, 95, 178) 50%,
-    rgb(246, 165, 165) 100%
-  );
-}
+@import url('./commonStuff.css');
 
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
-  min-width: 100%;
+  width: 100%;
   min-height: 70px;
   background: rgba(255, 255, 255, 0.4);
   display: flex;
@@ -35,18 +13,7 @@ body {
   padding: 15px;
   backdrop-filter: blur(10px);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-.navigation-bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 40%;
-  padding: 0 40px;
-  border-radius: 10px;
-  box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
-  border: 3px solid rgba(255, 255, 255, 0.18);
+  z-index: 1000;
 }
 
 .search-box {
@@ -66,7 +33,46 @@ body {
   outline: none;
   border-radius: 25px;
   box-shadow: 0 0 10px rgba(255, 194, 209, 0.3);
-  color: #ffffff;
+  color: #000000;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.search-results-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 1001;
+  margin-top: 5px;
+}
+
+#searchResults {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  background-color: #fff;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+
+#searchResults li {
+  padding: 12px 16px;
+  cursor: pointer;
+  color: #000000;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s ease;
+}
+
+#searchResults li:last-child {
+  border-bottom: none;
+}
+
+#searchResults li:hover {
+  background-color: #350303;
 }
 
 .search-box button {
@@ -105,27 +111,4 @@ body {
 .navbar > button:hover {
   transform: scale(1.1);
   background: #ff6f91;
-}
-
-.NoResults {
-  display: none;
-  text-align: center;
-  color: #555;
-  font-size: 1.2rem;
-  margin-top: 20px;
-}
-
-.pink-btn {
-    background: #ff6f91;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    transition: all 0.2s ease;
-}
-
-.pink-btn:hover {
-    background: #ff4c70;
 }

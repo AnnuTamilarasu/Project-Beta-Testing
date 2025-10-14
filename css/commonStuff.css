@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Comic Neue", cursive;
+  font-weight: 300;
+  font-style: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(
+    0deg,
+    rgb(142, 45, 121) 0%,
+    rgb(219, 95, 178) 50%,
+    rgb(246, 165, 165) 100%
+  );
+}
+
+/* Common container */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  height: 100%;
+  padding: 0 40px;
+  border-radius: 10px;
+}
+
+/* Buttons */
+.pink-btn,
+.delete-btn {
+  background: #ff6f91;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.pink-btn:hover,
+.delete-btn:hover {
+  background: #ff4c70;
+  transform: scale(1.05);
+}
+
+/* Input box */
+.input-box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.input-box input {
+  flex: 1;
+  padding: 10px 17px;
+  font-size: 1.1rem;
+  border: none;
+  outline: none;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(255, 194, 209, 0.3);
+  color: #333;
+}
+
+.input-box input::placeholder {
+  color: #bcbcbc;
+}
+
+.input-box button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.1rem;
+  background: rgba(225, 194, 209, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.input-box button:hover {
+  transform: scale(1.1);
+  background: #ff6f91;
+}
+
+/* Footer + No Results */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+.NoResults {
+  display: none;
+  text-align: center;
+  color: #555;
+  font-size: 1.2rem;
+  margin-top: 20px;
+}

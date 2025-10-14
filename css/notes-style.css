@@ -1,25 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import url('./commonStuff.css');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  font-family: "Comic Neue", cursive;
-  font-weight: 300;
-  font-style: normal;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(
-    0deg,
-    rgb(142, 45, 121) 0%,
-    rgb(219, 95, 178) 50%,
-    rgb(246, 165, 165) 100%
-  );
-}
 .notes-container {
   display: flex;
   justify-content: center;
@@ -35,9 +15,8 @@ body {
   max-width: 1000px;
   padding: 2rem;
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
+  align-items: center;
   gap: 30px;
   color: rgb(53, 4, 55);
   border-radius: 20px;
@@ -50,111 +29,71 @@ body {
   font-size: 2rem;
 }
 
-/* Text input area */
-.input-box {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.input-box input {
-  flex: 1;
-  padding: 10px 17px;
-  font-size: 1.1rem;
-  border: none;
-  outline: none;
-  border-radius: 22px;
-  box-shadow: 0 0 10px rgba(255, 194, 209, 0.3);
-  color: #333;
-}
-
-.input-box input::placeholder {
-  color: #bcbcbc;
-}
-
-.input-box button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 10px;
-  padding: 8px;
-  border-radius: 50%;
-  color: #ffffff;
-  font-size: 1.1rem;
-  background: rgba(225, 194, 209, 0.6);
-  border: 2px solid rgba(255, 255, 255, 0.18);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.input-box button:hover {
-  transform: scale(1.1);
-  background: #ecb8cf;
-}
-
-.individual-notes-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 15px;
-  width: 100%;
-}
-
-#note-list {
+#notes-list {
   list-style: none;
   width: 100%;
   padding: 0;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-#notes-list li {
-  background: rgba(211, 164, 164, 0.8);
-  margin-bottom: 10px;
-  padding: 10px 15px;
-  border-radius: 12px;
+.note-item {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 12px 18px;
+  border-radius: 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1rem;
-  transition: all 0.2s ease;
+  font-size: 1.05rem;
+  color: rgb(53, 4, 55);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, background 0.3s ease;
+  backdrop-filter: blur(8px);
 }
 
-#note-list li.completed {
-  text-decoration: line-through;
-  color: #aaa;
+.note-item:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.35);
 }
 
-.note {
-  width: 80%;
-  opacity: 0.6;
+.note-text {
+  flex: 1;
+  word-wrap: break-word;
+  margin-right: 15px;
+  font-weight: 400;
 }
 
-.footer {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 20px;
+.note-item .delete-btn {
+  background: #ff7ba9;
+  padding: 6px 14px;
+  border-radius: 10px;
   font-size: 0.9rem;
+  font-weight: 600;
 }
 
-.toggle-complete {
-    margin-right: 10px;
-    cursor: pointer;
+.note-item .delete-btn:hover {
+  background: #ff5b8c;
+  transform: scale(1.05);
 }
 
-.delete-btn {
-    background: #ff6f91;
-    color: rgb(249, 231, 240);
-    border: none;
-    padding: 5px 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    transition: all 0.2s ease;
+/* Mindmap notes as cards */
+.mindmap-note {
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  color: #2b002e;
+  backdrop-filter: blur(8px);
+  overflow-y: auto;
+  transition: transform 0.2s ease, background 0.3s ease;
 }
 
-.delete-btn:hover {
-    background: #ff4c70;
+.mindmap-note:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.4);
 }

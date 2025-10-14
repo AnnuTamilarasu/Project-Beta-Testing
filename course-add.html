@@ -4,19 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/nav-style.css" />
     <link rel="stylesheet" href="css/course-add.css" />
   </head>
   <body>
     <div id="navbar-container"></div>
 
-    <div class="NoResults">
-      <span id="search-count">0 results found</span>
+    <div class="container">
+      <div class="NoResults">
+        <span id="search-count">0 results found</span>
+      </div>
+
+      <div class="course-add-container">
+        <div id="subject-box-container"></div>
+      </div>
+
+      <div class="button-container">
+        <button type="button" id="courseAdd" class="pink-btn">
+          Add A Course
+        </button>
+      </div>
     </div>
-    <div class="course-add-container">
-      <div id="subject-box-container"></div>
-    </div>
-    <button type="submit" id="courseAdd" class="pink-btn">Add A Course</button>
+
     <script src="js/nav.js"></script>
     <script src="js/script.js"></script>
     <script src="js/course-add.js"></script>

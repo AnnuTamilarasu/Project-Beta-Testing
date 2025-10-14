@@ -1,34 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  font-family: "Comic Neue", cursive;
-  font-weight: 300;
-  font-style: normal;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(
-    0deg,
-    rgb(142, 45, 121) 0%,
-    rgb(219, 95, 178) 50%,
-    rgb(246, 165, 165) 100%
-  );
-}
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 15px;
-  width: 100%;
-  height: 100%;
-  padding: 0 40px;
-  border-radius: 10px;
-}
+@import url('./shared-base.css');
 
 .subject-app {
   width: 100%;
@@ -50,8 +20,7 @@ body {
   font-size: 2rem;
 }
 
-/* Text input area */
-.input-box {
+.description-box {
   width: 100%;
   display: flex;
   align-items: center;
@@ -59,27 +28,6 @@ body {
   gap: 10px;
 }
 
-.input-box input {
-  flex: 1;
-  padding: 10px 17px;
-  font-size: 1.1rem;
-  border: none;
-  outline: none;
-  border-radius: 22px;
-  box-shadow: 0 0 10px rgba(255, 194, 209, 0.3);
-  color: #333;
-}
-
-.input-box input::placeholder {
-  color: #bcbcbc;
-}
-.description-box{
-width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
 .description-box input {
   flex: 1;
   padding: 10px 20px;
@@ -93,26 +41,6 @@ width: 100%;
 
 .description-box input::placeholder {
   color: #bcbcbc;
-}
-
-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 10px;
-  padding: 8px;
-  border-radius: 50%;
-  color: #fff;
-  font-size: 1.1rem;
-  background: rgba(225, 194, 209, 0.6);
-  border: 2px solid rgba(255, 255, 255, 0.18);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-button:hover {
-  transform: scale(1.1);
-  background: #ff6f91;
 }
 
 .subject-container {
@@ -149,13 +77,4 @@ button:hover {
 
 .task {
   width: 200px;
-  opacity: 0.6;
-}
-
-.footer {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 20px;
-  font-size: 0.9rem;
-}
+  opacity: 0.6;}

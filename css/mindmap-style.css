@@ -1,7 +1,5 @@
 html, body {
   font-family: "Comic Neue", cursive;
-  font-weight: 300;
-  font-style: normal;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -29,30 +27,25 @@ h1 {
   user-select: none;
 }
 
-.Button {
+.Button, .Mutton {
   position: absolute;
-  top: -12px;
-  right: -12px;
   width: 30px;
   height: 30px;
   background: purple;
   color: white;
-  border: 0;
-  border-radius: 50px;
+  border: none;
+  border-radius: 50%;
   cursor: pointer;
 }
 
+.Button {
+  top: -12px;
+  right: -12px;
+}
+
 .Mutton {
-  position: absolute;
   top: -12px;
   right: -42px;
-  width: 30px;
-  height: 30px;
-  background: purple;
-  color: white;
-  border: 0;
-  border-radius: 50px;
-  cursor: pointer;
 }
 
 svg {
