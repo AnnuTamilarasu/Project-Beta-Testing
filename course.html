@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Course</title>
 
-    <link rel="stylesheet" href="css/commonStuff.css" />
+    <link rel="stylesheet" href="css/course.css" />
     <link rel="stylesheet" href="css/nav-style.css" />
-    <link rel="stylesheet" href="css/todo.css" />
+    <link rel="stylesheet" href="css/notes-style.css" />
   </head>
 
   <body>
     <div id="navbar-container"></div>
     <div id="notes-navbar-container"></div>
 
-    <div class="subject-container">
-      <div class="subject-app">
+    <div class="notes-container">
+      <div class="notes-app">
         <h1>Subject</h1>
         <form class="input-box" id="subject-form">
           <input
@@ -31,7 +31,15 @@
             placeholder="description..."
           />
         </form>
-        <button type="submit" id="subjectAdd" class="pink-btn">Add</button>
+        <footer>
+          <button type="submit" id="subjectAdd" class="pink-btn">Add</button>
+          <button
+            onclick="window.location.href='course-add.html'"
+            class="pink-btn"
+          >
+            Back
+          </button>
+        </footer>
       </div>
     </div>
 

@@ -6,7 +6,7 @@
   left: 0;
   width: 100%;
   min-height: 70px;
-  background: rgba(255, 255, 255, 0.4);
+  background:#DD6692;
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -97,7 +97,7 @@
 }
 
 .navbar > button {
-  background: #ee9db0;
+  background: #E485A8;
   color: white;
   border: none;
   padding: 10px 30px;
@@ -105,10 +105,10 @@
   cursor: pointer;
   transition: all 0.2s ease;
   min-width: 100px;
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 .navbar > button:hover {
   transform: scale(1.1);
-  background: #ff6f91;
+  background: #CC2D67;
 }

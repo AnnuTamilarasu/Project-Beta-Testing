@@ -1,4 +1,3 @@
-// ---- Elements ----
 const noteInput = document.querySelector('#notes-input');
 const noteButton = document.querySelector('#add-note-btn');
 const noteList = document.querySelector('#notes-list');
@@ -11,7 +10,6 @@ back.className = 'delete-btn';
 back.style.marginTop = '10px';
 document.querySelector('.notes-app').appendChild(back);
 
-// ---- Get current user and subject ----
 const currentUser = localStorage.getItem('currentUser');
 if (!currentUser) {
     window.location.href = 'login.html';
@@ -25,11 +23,10 @@ const subjects = currentUserData.subjects || [];
 if (subjectIndex !== null && subjects[subjectIndex]) {
     document.querySelector('.notes-app h1').textContent = `Notes for ${subjects[subjectIndex].subject}`;
 }
-
-// Get notes for current subject
 let notes = subjects[subjectIndex]?.notes || [];
 
-// ---- Functions ----
+document.getElementById("mindmap-btn").addEventListener("click", addMindmap);
+
 function saveNotes() {
     if (!users[currentUser]) users[currentUser] = {};
     if (!users[currentUser].subjects) users[currentUser].subjects = [];
@@ -41,19 +38,44 @@ function saveNotes() {
 function addNote(event) {
     event.preventDefault();
     const noteText = noteInput.value.trim();
-    if (!noteText) return;
-
-    const newNote = {
+    if (noteText === '') return;
+    
+    const addedNote = {
         text: noteText,
         completed: false,
         id: Date.now()
     };
-
-    notes.push(newNote);
+    
+    notes.push(addedNote);
     noteInput.value = '';
     saveNotes();
     renderNotes();
     updateNoteCount();
+}
+
+function addMindmap(event) {
+    event.preventDefault();
+
+    const mindmapName = prompt("Enter a name", "New Mindmap");
+    if (!mindmapName) return;
+
+    const newMindmap = {
+        name: mindmapName,
+        id: Date.now()
+    };
+
+    notes.push({
+        text: mindmapName,
+        completed: false,
+        id: newMindmap.id,
+        type: "mindmap"
+    });
+
+    saveNotes();
+    renderNotes();
+    updateNoteCount();
+
+    localStorage.setItem('currentMindmap', newMindmap.id);
 }
 
 function renderNotes() {
@@ -64,6 +86,10 @@ function renderNotes() {
         li.innerHTML = `
             <input type="checkbox" ${note.completed ? 'checked' : ''} data-index="${index}" class="toggle-complete"/>
             <span>${note.text}</span>
+            ${note.type === 'mindmap'
+                ? `<button data-index="${index}" class="open-mindmap-btn">Open</button>`
+                : ''
+            }
             <button data-index="${index}" class="delete-btn">Delete</button>
         `;
         noteList.appendChild(li);
@@ -96,7 +122,6 @@ function clearCompletedNotes() {
     updateNoteCount();
 }
 
-// ---- Event Listeners ----
 noteButton.addEventListener('click', addNote);
 
 noteInput.addEventListener('keypress', (event) => {
@@ -107,6 +132,11 @@ noteList.addEventListener('click', (event) => {
     const index = parseInt(event.target.getAttribute('data-index'));
     if (event.target.classList.contains('toggle-complete')) toggleComplete(index);
     if (event.target.classList.contains('delete-btn')) deleteNoteByIndex(index);
+    if (event.target.classList.contains('open-mindmap-btn')) {
+        localStorage.setItem('currentMindmap', notes[index].id);
+        localStorage.setItem('currentIndex', subjectIndex);
+        window.location.href = 'mindmap.html';
+    }
 });
 
 clearCompletedBtn.addEventListener('click', clearCompletedNotes);
@@ -115,7 +145,6 @@ back.addEventListener('click', () => {
     window.location.href = 'course-add.html';
 });
 
-// ---- Initialize ----
 function init() {
     renderNotes();
     updateNoteCount();

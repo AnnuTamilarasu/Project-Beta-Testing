@@ -26,20 +26,33 @@ container.addEventListener("click",function(e){
   }
 });
 function deleteSubject(index){
+  index=Number(index);
   const updatedSubjects=JSON.parse(localStorage.getItem("subjects"))||[];
   updatedSubjects.splice(index,1);
   localStorage.setItem("subjects",JSON.stringify(updatedSubjects));
   
   const allNotes=JSON.parse(localStorage.getItem("allNotes"))||{};
-  delete allNotes[index];
-
+  const allMindmaps=JSON.parse(localStorage.getItem('allMindmaps'))||{};
   const newAllNotes={};
-  updatedSubjects.forEach((sub,newIndex)=>{
-    if(allNotes.hasOwnProperty(newIndex>=index?newIndex+1:newIndex)){
-      newAllNotes[newIndex]=allNotes[newIndex>=index?newIndex+1:newIndex];
+  const newAllMindmaps={};
+  Object.keys(allNotes).forEach(key=>{
+    const oldIndex=Number(key);
+    if(oldIndex===index){
+      return;
     }
+    const newIndex=oldIndex>index?oldIndex-1:oldIndex;
+    newAllNotes[newIndex]=allNotes[key];
+  });
+  Object.keys(allMindmaps).forEach(key=>{
+    const oldIndex=Number(key);
+    if(oldIndex===index){
+      return;
+    }
+    const newIndex=oldIndex>index?oldIndex-1:oldIndex;
+    newAllMindmaps[newIndex]=allMindmaps[key];
   });
   localStorage.setItem("allNotes",JSON.stringify(newAllNotes));
+  localStorage.setItem("allMindmaps",JSON.stringify(newAllMindmaps));
   window.location.reload();
 }
   });

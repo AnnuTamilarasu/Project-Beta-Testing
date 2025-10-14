@@ -1,34 +1,61 @@
+document.getElementById("ideaAdd").addEventListener("click", function() {
+    const node1=createNode(200,100,"Main Idea");
+  });
+  document.getElementById("back").addEventListener("click", function() {
+    window.location.href = 'notes.html';
+  });
+  document.getElementById("save").addEventListener("click", function() {
+    saveData();
+  });
 const connections=[];
   function saveData(){
-	const nodes=Array.from(document.querySelectorAll(".container")).map(node=>({
-	id:node.dataset.id,
-	x:parseFloat(node.style.left),
-	y:parseFloat(node.style.top),
-	text:node.textContent.replace(/\+/g,'').replace(/-/g,'')
-	}));
-	const connectionsData=connections.map(c=>({
-	parentId:c.nodeA.dataset.id,
-	childId:c.nodeB.dataset.id
-	}));
-	const mindData={nodes,connections:connectionsData};
-	localStorage.setItem("mindmap",JSON.stringify(mindData));
-	}
-	
-	function loadMindmap(){
-	const data=localStorage.getItem("mindmap");
-	if(!data)return false;
-	const{nodes,connections:connectionsData}=JSON.parse(data);
-	const nodeMap={};
-	nodes.forEach(n=>{
-	const node=createNode(n.x,n.y,n.text);
-	node.dataset.id=n.id;
-	nodeMap[n.id]=node;
-	});
-	connectionsData.forEach(c=>{
-	connectNodes(nodeMap[c.parentId],nodeMap[c.childId]);
-	});
-	return true;
-	}
+  const nodes=Array.from(document.querySelectorAll(".container")).map(node=>({
+  id:node.dataset.id,
+  x:parseFloat(node.style.left),
+  y:parseFloat(node.style.top),
+  text:node.textContent.replace(/\+/g,'').replace(/-/g,'')
+  }));
+  const connectionsData=connections.map(c=>({
+  parentId:c.nodeA.dataset.id,
+  childId:c.nodeB.dataset.id
+  }));
+  const mindData={nodes,connections:connectionsData};
+    const currentId=localStorage.getItem("currentMindmap");
+    const subjectIndex=localStorage.getItem("currentIndex");
+
+    let allMindmaps=JSON.parse(localStorage.getItem("allMindmaps"))||{};
+    if (!allMindmaps[subjectIndex]){
+        allMindmaps[subjectIndex]={};
+    }
+    allMindmaps[subjectIndex][currentId]=mindData;
+  localStorage.setItem("allMindmaps",JSON.stringify(allMindmaps));
+  }
+  
+  function loadMindmap(){
+        const currentId=localStorage.getItem("currentMindmap");
+        const subjectIndex=localStorage.getItem("currentIndex");
+        const allMindmaps=JSON.parse(localStorage.getItem("allMindmaps"))||{};
+
+        const mindData=
+        allMindmaps[subjectIndex]&& allMindmaps[subjectIndex][currentId]
+        ?allMindmaps[subjectIndex][currentId]
+        :null;
+
+        if(!mindData)return false;
+        
+        const{nodes,connections:connectionsData}=mindData;
+        const nodeMap={};
+
+        nodes.forEach(n=>{
+            const node=createNode(n.x,n.y,n.text);
+            node.dataset.id=n.id;
+            nodeMap[n.id]=node;
+        });
+        connectionsData.forEach(c=>{
+            connectNodes(nodeMap[c.parentId],nodeMap[c.childId]);
+        });
+        return true;
+  }
   function connectNodes(nodeA,nodeB){
   const line=document.createElementNS("http://www.w3.org/2000/svg", "line");
   line.setAttribute("stroke","#333");
@@ -105,7 +132,7 @@ const connections=[];
           el.style.left = x - shiftX + "px";
           el.style.top = y - shiftY + "px";
           if (onMove) onMove();
-		  saveData();
+      saveData();
         }
 
         function onMouseMove(e) { moveAt(e.pageX, e.pageY); }
@@ -117,9 +144,9 @@ const connections=[];
       };
       el.ondragstart = () => false;
     }
-	if(!loadMindmap()){
-	const node1=createNode(200,100,"Main Idea");
-	const node2=createNode(400,300,"Sub Idea");
-	connectNodes(node1,node2);
-	saveData();
-	}
+  if(!loadMindmap()){
+  const node1=createNode(200,100,"Main Idea");
+  const node2=createNode(400,300,"Sub Idea");
+  connectNodes(node1,node2);
+  saveData();
+  }

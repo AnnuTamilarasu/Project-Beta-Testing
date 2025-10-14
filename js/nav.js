@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
   if (navbarContainer) {
     navbarContainer.innerHTML = `
       <nav class="navbar">
-        <button onclick="window.location.href='index.html'">Home</button>
         <button onclick="window.location.href='todo.html'">ToDo</button>
         <button onclick="window.location.href='course-add.html'">Notes</button>
         <div class="search-box">
