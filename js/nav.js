@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     navbarContainer.innerHTML = `
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
     <nav class="navbar">
+        <button onclick="window.location.href='index.html'">Home</button>
         <button onclick="window.location.href='todo.html'">ToDo</button>
         <button onclick="window.location.href='course-add.html'">Notes</button>
         <div class="search-box">
