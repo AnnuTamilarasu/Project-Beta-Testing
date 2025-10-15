@@ -87,15 +87,16 @@ body {
   border-radius: 50%;
   color: #fff;
   font-size: 1.1rem;
-  background: rgba(225, 194, 209, 0.6);
+  background: rgba(200, 59, 111);
   border: 2px solid rgba(255, 255, 255, 0.18);
   cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.855);
 }
 
 .input-box button:hover {
   transform: scale(1.1);
-  background: #ff6f91;
+  background: #A22452;
 }
 
 /* Footer + No Results */

@@ -1,10 +1,17 @@
+// In-memory storage instead of localStorage
+const memoryStorage = {
+  currentUser: null,
+  searchIndex: null
+};
+
 document.addEventListener('DOMContentLoaded', function() {
   const navbarContainer = document.getElementById('navbar-container');
-  const currentUser = localStorage.getItem('currentUser');
+  const currentUser = memoryStorage.currentUser;
 
   if (navbarContainer) {
     navbarContainer.innerHTML = `
-      <nav class="navbar">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+    <nav class="navbar">
         <button onclick="window.location.href='todo.html'">ToDo</button>
         <button onclick="window.location.href='course-add.html'">Notes</button>
         <div class="search-box">
@@ -22,25 +29,23 @@ document.addEventListener('DOMContentLoaded', function() {
       </nav>
     `;
 
-    // Initialize search functionality
     initializeSearch();
     
-    // Logout functionality
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) {
       logoutBtn.addEventListener('click', () => {
-        localStorage.removeItem('currentUser');
+        memoryStorage.currentUser = null;
         window.location.href = 'login.html';
       });
     }
   }
 });
+
 function initializeSearch() {
   const searchInput = document.getElementById('searchInput');
   const searchResults = document.getElementById('searchResults');
 
-  // Index all searchable content
-  const searchIndex = JSON.parse(localStorage.getItem('searchIndex')) || buildSearchIndex();
+  const searchIndex = memoryStorage.searchIndex || buildSearchIndex();
 
   searchInput.addEventListener('input', function(e) {
     const query = e.target.value.trim().toLowerCase();
@@ -58,12 +63,12 @@ function initializeSearch() {
     const index = {
       'todo.html': {
         title: 'ToDo List',
-        items: JSON.parse(localStorage.getItem('todos')) || [],
+        items: [],
         keywords: ['tasks', 'homework', 'assignments', 'due dates']
       },
       'course-add.html': {
         title: 'Course Notes',
-        items: JSON.parse(localStorage.getItem('courses')) || [],
+        items: [],
         keywords: ['subjects', 'notes', 'materials', 'study']
       },
       'index.html': {
@@ -73,7 +78,7 @@ function initializeSearch() {
       }
     };
     
-    localStorage.setItem('searchIndex', JSON.stringify(index));
+    memoryStorage.searchIndex = index;
     return index;
   }
 
@@ -81,7 +86,6 @@ function initializeSearch() {
     const results = [];
     
     for (const [page, data] of Object.entries(searchIndex)) {
-      // Search in items
       data.items.forEach(item => {
         if (typeof item === 'string' && item.toLowerCase().includes(query)) {
           results.push({
@@ -100,7 +104,6 @@ function initializeSearch() {
         }
       });
       
-      // Search in keywords
       data.keywords.forEach(keyword => {
         if (keyword.toLowerCase().includes(query)) {
           results.push({
@@ -122,7 +125,6 @@ function initializeSearch() {
     if (results.length === 0) {
       searchResults.innerHTML = '<li class="no-results">No matches found</li>';
     } else {
-      // Group by page
       const groupedResults = {};
       results.forEach(result => {
         if (!groupedResults[result.page]) {
@@ -131,7 +133,6 @@ function initializeSearch() {
         groupedResults[result.page].push(result);
       });
       
-      // Display grouped results
       for (const [page, pageResults] of Object.entries(groupedResults)) {
         const header = document.createElement('li');
         header.className = 'result-header';
