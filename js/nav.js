@@ -1,12 +1,6 @@
-// In-memory storage instead of localStorage
-const memoryStorage = {
-  currentUser: null,
-  searchIndex: null
-};
-
 document.addEventListener('DOMContentLoaded', function() {
   const navbarContainer = document.getElementById('navbar-container');
-  const currentUser = memoryStorage.currentUser;
+  const currentUser = localStorage.getItem('currentUser');
 
   if (navbarContainer) {
     navbarContainer.innerHTML = `
@@ -35,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) {
       logoutBtn.addEventListener('click', () => {
-        memoryStorage.currentUser = null;
+        localStorage.removeItem('currentUser'); 
         window.location.href = 'login.html';
       });
     }
@@ -46,7 +40,7 @@ function initializeSearch() {
   const searchInput = document.getElementById('searchInput');
   const searchResults = document.getElementById('searchResults');
 
-  const searchIndex = memoryStorage.searchIndex || buildSearchIndex();
+  const searchIndex = buildSearchIndex();
 
   searchInput.addEventListener('input', function(e) {
     const query = e.target.value.trim().toLowerCase();
@@ -79,7 +73,6 @@ function initializeSearch() {
       }
     };
     
-    memoryStorage.searchIndex = index;
     return index;
   }
 

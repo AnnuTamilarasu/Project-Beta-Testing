@@ -53,6 +53,7 @@ if (toggleBtn) {
         message.textContent = 'Invalid username or password.';
       } else {
         localStorage.setItem('currentUser', username);
+        currentUser = username;
         window.location.href = 'index.html';
       }
     }
