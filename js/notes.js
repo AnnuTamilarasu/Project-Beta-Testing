@@ -1,14 +1,9 @@
 const noteInput = document.querySelector('#notes-input');
 const noteButton = document.querySelector('#add-note-btn');
 const noteList = document.querySelector('#notes-list');
-const noteCount = document.querySelector('#note-count');
-const clearCompletedBtn = document.querySelector('#clear-completed-btn');
-
-const back = document.createElement('button');
-back.textContent = 'back';
-back.className = 'delete-btn';
-back.style.marginTop = '10px';
-document.querySelector('.notes-app').appendChild(back);
+const imageBtn = document.getElementById("image-btn");
+const clearCompletedBtn = document.getElementById("clear-completed-btn");
+const back = document.getElementById("back");
 
 const currentUser = localStorage.getItem('currentUser');
 if (!currentUser) {
@@ -20,9 +15,6 @@ const users = JSON.parse(localStorage.getItem('users')) || {};
 const currentUserData = users[currentUser] || {};
 const subjects = currentUserData.subjects || [];
 
-if (subjectIndex !== null && subjects[subjectIndex]) {
-    document.querySelector('.notes-app h1').textContent = `Notes for ${subjects[subjectIndex].subject}`;
-}
 let notes = subjects[subjectIndex]?.notes || [];
 
 document.getElementById("mindmap-btn").addEventListener("click", addMindmap);
@@ -50,7 +42,6 @@ function addNote(event) {
     noteInput.value = '';
     saveNotes();
     renderNotes();
-    updateNoteCount();
 }
 
 function addMindmap(event) {
@@ -73,7 +64,6 @@ function addMindmap(event) {
 
     saveNotes();
     renderNotes();
-    updateNoteCount();
 
     localStorage.setItem('currentMindmap', newMindmap.id);
 }
@@ -96,30 +86,22 @@ function renderNotes() {
     });
 }
 
-function updateNoteCount() {
-    const remaining = notes.filter(note => !note.completed).length;
-    noteCount.textContent = `${remaining} note${remaining !== 1 ? 's' : ''} left`;
-}
-
 function toggleComplete(index) {
     notes[index].completed = !notes[index].completed;
     saveNotes();
     renderNotes();
-    updateNoteCount();
 }
 
 function deleteNoteByIndex(index) {
     notes.splice(index, 1);
     saveNotes();
     renderNotes();
-    updateNoteCount();
 }
 
 function clearCompletedNotes() {
     notes = notes.filter(note => !note.completed);
     saveNotes();
     renderNotes();
-    updateNoteCount();
 }
 
 noteButton.addEventListener('click', addNote);
@@ -139,15 +121,25 @@ noteList.addEventListener('click', (event) => {
     }
 });
 
-clearCompletedBtn.addEventListener('click', clearCompletedNotes);
+if (clearCompletedBtn) {
+    clearCompletedBtn.addEventListener('click', clearCompletedNotes);
+}
 
-back.addEventListener('click', () => {
-    window.location.href = 'course-add.html';
-});
+if (back) {
+    back.addEventListener('click', () => {
+        window.location.href = 'course-add.html';
+    });
+}
+
+if (imageBtn) {
+    imageBtn.addEventListener('click', function () {
+        console.log("Image button clicked");
+        window.location.href = "https://test-321-49663579-96f47.firebaseapp.com";
+    });
+}
 
 function init() {
     renderNotes();
-    updateNoteCount();
 }
 
 init();

@@ -58,7 +58,7 @@ body {
   max-height: 200px;
   overflow-y: auto;
   color: #000000;
-
+}
 #searchResults li {
   padding: 10px;
   cursor: pointer;

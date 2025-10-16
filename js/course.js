@@ -1,12 +1,6 @@
 const subjectInput = document.querySelector('#subject-input');
       const describeInput=document.querySelector('#description-input');
 const subjectButton = document.querySelector('#subjectAdd');
-const back=document.createElement('button');
-
-back.textContent='back';
-back.className='delete-btn';
-back.style.marginTop='10px';
-document.querySelector('.subject-app').appendChild(back);
 
 let subjects = JSON.parse(localStorage.getItem('subjects')) || [];
 function addSubject(event) {
@@ -41,7 +35,4 @@ describeInput.addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
         addSubject(event);
     }
-});
-back.addEventListener('click',function(){
-window.location.href = 'course-add.html';
 });
