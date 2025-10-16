@@ -41,7 +41,7 @@
 #notes-list {
   list-style: none;
   width: 100%;
-  padding: 0;
+  padding: 20px;
   margin-top: 10px;
   display: flex;
   flex-direction: column;
@@ -51,12 +51,12 @@
 #notes-list li {
   background: rgba(255, 255, 255, 0.4);
   margin-bottom: 10px;
-  padding: 10px 15px;
+  padding: fit-content 30px;
   border-radius: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1rem;
+  font-size: 1.5rem;
   transition: all 0.2s ease;
 }
 
@@ -84,19 +84,6 @@
   word-wrap: break-word;
   margin-right: 15px;
   font-weight: 400;
-}
-
-.note-item .delete-btn {
-  background: #ff7ba9;
-  padding: 6px 14px;
-  border-radius: 10px;
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-.note-item .delete-btn:hover {
-  background: #ff5b8c;
-  transform: scale(1.05);
 }
 
 #note-list {

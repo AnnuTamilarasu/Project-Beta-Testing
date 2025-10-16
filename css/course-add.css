@@ -56,21 +56,16 @@
   background: #ee9db0;
 }
 
-.delete-btn {
+.subject-single .delete-btn {
   position: absolute;
   bottom: 10px;
   right: 10px;
   background: #f35277;
-  color: white;
-  border: none;
   padding: 5px 10px;
-  border-radius: 8px;
-  cursor: pointer;
   font-size: 0.8rem;
-  transition: all 0.2s ease;
 }
 
-.delete-btn:hover {
+.subject-single .delete-btn:hover {
   background: #ff4c70;
 }
 

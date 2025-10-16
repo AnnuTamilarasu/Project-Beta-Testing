@@ -2,7 +2,6 @@ const currentUser = localStorage.getItem('currentUser');
 if (!currentUser) {
   window.location.href = 'login.html';
 }
-
 const todoInput = document.querySelector('#task-input');
 const todoButton = document.querySelector('#add-task-btn');
 const todoList = document.querySelector('#task-list');

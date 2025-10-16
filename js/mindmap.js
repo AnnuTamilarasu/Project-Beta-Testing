@@ -7,19 +7,22 @@ document.getElementById("ideaAdd").addEventListener("click", function() {
   document.getElementById("save").addEventListener("click", function() {
     saveData();
   });
+  document.querySelector("h1").textContent = 
+  localStorage.getItem("currentMindmapName") || "MindMap";
 const connections=[];
+
   function saveData(){
-  const nodes=Array.from(document.querySelectorAll(".container")).map(node=>({
-  id:node.dataset.id,
-  x:parseFloat(node.style.left),
-  y:parseFloat(node.style.top),
-  text:node.textContent.replace(/\+/g,'').replace(/-/g,'')
-  }));
-  const connectionsData=connections.map(c=>({
-  parentId:c.nodeA.dataset.id,
-  childId:c.nodeB.dataset.id
-  }));
-  const mindData={nodes,connections:connectionsData};
+	const nodes=Array.from(document.querySelectorAll(".container")).map(node=>({
+	id:node.dataset.id,
+	x:parseFloat(node.style.left),
+	y:parseFloat(node.style.top),
+	text:node.textContent.replace(/\+/g,'').replace(/-/g,'')
+	}));
+	const connectionsData=connections.map(c=>({
+	parentId:c.nodeA.dataset.id,
+	childId:c.nodeB.dataset.id
+	}));
+	const mindData={nodes,connections:connectionsData};
     const currentId=localStorage.getItem("currentMindmap");
     const subjectIndex=localStorage.getItem("currentIndex");
 
@@ -28,10 +31,10 @@ const connections=[];
         allMindmaps[subjectIndex]={};
     }
     allMindmaps[subjectIndex][currentId]=mindData;
-  localStorage.setItem("allMindmaps",JSON.stringify(allMindmaps));
-  }
-  
-  function loadMindmap(){
+	localStorage.setItem("allMindmaps",JSON.stringify(allMindmaps));
+	}
+	
+	function loadMindmap(){
         const currentId=localStorage.getItem("currentMindmap");
         const subjectIndex=localStorage.getItem("currentIndex");
         const allMindmaps=JSON.parse(localStorage.getItem("allMindmaps"))||{};
@@ -55,7 +58,7 @@ const connections=[];
             connectNodes(nodeMap[c.parentId],nodeMap[c.childId]);
         });
         return true;
-  }
+	}
   function connectNodes(nodeA,nodeB){
   const line=document.createElementNS("http://www.w3.org/2000/svg", "line");
   line.setAttribute("stroke","#333");
@@ -132,7 +135,7 @@ const connections=[];
           el.style.left = x - shiftX + "px";
           el.style.top = y - shiftY + "px";
           if (onMove) onMove();
-      saveData();
+		  saveData();
         }
 
         function onMouseMove(e) { moveAt(e.pageX, e.pageY); }
@@ -144,9 +147,10 @@ const connections=[];
       };
       el.ondragstart = () => false;
     }
-  if(!loadMindmap()){
-  const node1=createNode(200,100,"Main Idea");
-  const node2=createNode(400,300,"Sub Idea");
-  connectNodes(node1,node2);
-  saveData();
-  }
+	if(!loadMindmap()){
+	const node1=createNode(200,100,"Main Idea");
+	const node2=createNode(400,300,"Sub Idea");
+	connectNodes(node1,node2);
+	saveData();
+	}
+    

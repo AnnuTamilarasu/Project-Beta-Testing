@@ -1,6 +1,3 @@
-// ===== USER LOGIN / SIGNUP SYSTEM =====
-
-// Global variable to track current user
 let currentUser = localStorage.getItem('currentUser') || null;
 
 const usernameInput = document.getElementById('username');
@@ -19,6 +16,9 @@ if (toggleBtn) {
     loginBtn.textContent = isSignup ? 'Sign Up' : 'Login';
     toggleBtn.textContent = isSignup ? 'Already have an account?' : 'Create Account';
     message.textContent = '';
+    
+    usernameInput.value = '';
+    passwordInput.value = '';
   });
 
   loginBtn.addEventListener('click', () => {
@@ -39,10 +39,14 @@ if (toggleBtn) {
         users[username] = { password, todos: [], notes: [] };
         localStorage.setItem('users', JSON.stringify(users));
         message.textContent = 'Account created! You can now log in.';
+        
         isSignup = false;
-        formTitle.textContent = 'Log In';
-        loginBtn.textContent = 'Log In';
+        formTitle.textContent = 'Login';
+        loginBtn.textContent = 'Login';
         toggleBtn.textContent = 'Create Account';
+        
+        usernameInput.value = '';
+        passwordInput.value = '';
       }
     } else {
       if (!users[username] || users[username].password !== password) {
@@ -54,3 +58,32 @@ if (toggleBtn) {
     }
   });
 }
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  const handleLogout = () => {
+    localStorage.removeItem('currentUser');
+    window.location.href = 'login.html';
+  };
+
+
+  const logoutBtn = document.getElementById('logout-btn');
+  const navLogoutBtn = document.getElementById('nav-logout');
+  const logoutLink = document.getElementById('logout');
+  
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', handleLogout);
+  }
+  if (navLogoutBtn) {
+    navLogoutBtn.addEventListener('click', handleLogout);
+  }
+  if (logoutLink) {
+    logoutLink.addEventListener('click', handleLogout);
+  }
+
+  // Check if user is logged in (only on non-login pages)
+  if (!toggleBtn && !currentUser) {
+    window.location.href = 'login.html';
+  }
+});

@@ -1,31 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const navbarContainer = document.getElementById('navbar-container');
-    const currentUser = localStorage.getItem('currentUser');
-    
-    if (navbarContainer) {
-        navbarContainer.innerHTML = `
-            <nav class="navbar">
-                <button onclick="window.location.href='index.html'">Home</button>
-                <button onclick="window.location.href='todo.html'">ToDo</button>
-                <button onclick="window.location.href='course-add.html'">Notes</button>
-                <div class="search-box">
-                    <input type="text" placeholder="Search..." />
-                    <button type="submit">Search</button>
-                </div>
-                ${currentUser 
-                    ? <button id="logout-btn">Logout</button> 
-                    : <button onclick="window.location.href='login.html'">Login</button>
-                }
-            </nav>
-        `;
-        
-        // Logout functionality
-        const logoutBtn = document.getElementById('logout-btn');
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', () => {
-                localStorage.removeItem('currentUser');
-                window.location.href = 'login.html';
-            });
-        }
-    }
+    console.log('App loaded successfully!');
 });
+let quoteN=Math.floor(Math.random()*5+1);
+let quote;
+if(quoteN===1){
+quote="'The future belongs to those who prepare for it today.'";
+}else if(quoteN===2){
+quote="'Don’t watch the clock; do what it does. Keep going.'";
+}else if(quoteN===3){
+quote="'Success is not final, failure is not fatal: it is the courage to continue that counts.'";
+}else if(quoteN===4){
+quote="'Believe you can and you're halfway there.'";
+}else if(quoteN===5){
+quote="'The best way to predict the future is to create it.'";
+}
+document.querySelector("h1").textContent =quote;

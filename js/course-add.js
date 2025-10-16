@@ -1,3 +1,7 @@
+const currentUser = localStorage.getItem('currentUser');
+if (!currentUser) {
+  window.location.href = 'login.html';
+}
 document.getElementById("courseAdd").addEventListener("click", function() {
     window.location.href = "course.html";
   });
@@ -14,7 +18,7 @@ document.getElementById("courseAdd").addEventListener("click", function() {
         <small>${s.description}</small>
         </div>
         <button data-index="${index}" class="delete-btn">Delete</button>
-        <button data-index"${index}" class="notes-btn" onclick="openNotes(${index})">AddNotes</button>
+        <button data-index="${index}" class="notes-btn" onclick="openNotes(${index})">AddNotes</button>
       `;
           container.appendChild(single);
     });
@@ -33,8 +37,10 @@ function deleteSubject(index){
   
   const allNotes=JSON.parse(localStorage.getItem("allNotes"))||{};
   const allMindmaps=JSON.parse(localStorage.getItem('allMindmaps'))||{};
+  const allContents = JSON.parse(localStorage.getItem("allNoteContents")) || {};
   const newAllNotes={};
   const newAllMindmaps={};
+  const newAllContents={};
   Object.keys(allNotes).forEach(key=>{
     const oldIndex=Number(key);
     if(oldIndex===index){
@@ -51,8 +57,17 @@ function deleteSubject(index){
     const newIndex=oldIndex>index?oldIndex-1:oldIndex;
     newAllMindmaps[newIndex]=allMindmaps[key];
   });
+  Object.keys(allContents).forEach(key=>{
+    const oldIndex=Number(key);
+    if(oldIndex===index){
+      return;
+    }
+    const newIndex=oldIndex>index?oldIndex-1:oldIndex;
+    newAllContents[newIndex]=allContents[key];
+  });
   localStorage.setItem("allNotes",JSON.stringify(newAllNotes));
   localStorage.setItem("allMindmaps",JSON.stringify(newAllMindmaps));
+  localStorage.setItem("allNoteContents",JSON.stringify(newAllContents));
   window.location.reload();
 }
   });
